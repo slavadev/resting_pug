@@ -31,6 +31,10 @@ module SimpleRestAPI
           end
         end
 
+        def show
+          render_subject(@subject)
+        end
+
         protected
 
         # SUBJECT MODEL
