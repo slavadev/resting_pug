@@ -32,13 +32,13 @@ RSpec.describe BooksController, type: :controller do
     end
 
     context 'when everything is ok' do
-      let(:params) { { book: { title: 'title', author: 'author' } } }
+      let(:params) { { book: { title: '11/22/63', author: 'Stephen King' } } }
       it 'returns 200' do
         expect(response).to have_http_status(200)
       end
 
       it 'returns a book' do
-        expect(response.body).to eq({ book: { id: book.id, title: 'title', author: 'author', created_at: book.created_at, updated_at: book.updated_at } }.to_json)
+        expect(response.body).to eq({ book: { id: book.id, title: '11/22/63', author: 'Stephen King', created_at: book.created_at, updated_at: book.updated_at } }.to_json)
       end
     end
   end

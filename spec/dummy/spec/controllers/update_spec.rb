@@ -6,7 +6,7 @@ RSpec.describe BooksController, type: :controller do
     let(:params) { { id: id, book: book_params } }
     let(:id) { nil }
     let(:book_params) { nil }
-    let(:book) { Book.create(title: 'title', author: 'author') }
+    let(:book) { Book.create(title: '11/22/63', author: 'Stephen King') }
 
     before do
       subject
@@ -44,14 +44,14 @@ RSpec.describe BooksController, type: :controller do
 
     context 'when everything is ok' do
       let(:id) { book.id }
-      let(:book_params) { { title: 'new title', author: 'new author' } }
+      let(:book_params) { { title: 'A Song of Ice and Fire', author: 'George R. R. Martin' } }
       it 'returns 200' do
         expect(response).to have_http_status(200)
       end
 
       it 'returns a book' do
         book.reload
-        expect(response.body).to eq({ book: { id: book.id, title: 'new title', author: 'new author', created_at: book.created_at, updated_at: book.updated_at } }.to_json)
+        expect(response.body).to eq({ book: { id: book.id, title: 'A Song of Ice and Fire', author: 'George R. R. Martin', created_at: book.created_at, updated_at: book.updated_at } }.to_json)
       end
     end
   end
