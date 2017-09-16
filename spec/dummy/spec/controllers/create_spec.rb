@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe BooksController, type: :controller do
-  before do
-    subject
-  end
-
   describe 'create' do
     subject { post :create, params: params }
     let(:book) { Book.last }
     let(:params) { {} }
+
+    before do
+      subject
+    end
 
     context 'when params are empty' do
       it 'returns 400' do

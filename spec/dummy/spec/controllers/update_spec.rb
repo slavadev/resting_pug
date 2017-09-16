@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe BooksController, type: :controller do
-  before do
-    subject
-  end
-
   describe 'update' do
     subject { patch :update, params: params }
     let(:params) { { id: id, book: book_params } }
     let(:id) { nil }
     let(:book_params) { nil }
     let(:book) { Book.create(title: 'title', author: 'author') }
+
+    before do
+      subject
+    end
 
     context 'when id is wrong' do
       let(:id) { 0 }
