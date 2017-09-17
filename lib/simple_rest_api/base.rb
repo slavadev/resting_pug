@@ -6,43 +6,52 @@ module SimpleRestAPI
       base.class_eval do
         rescue_from ActionController::ParameterMissing, with: :render_param_missing
         rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
-        before_action :fetch_subject, only: [:update, :destroy, :show]
-        before_action :fetch_subjects, :paginate_subjects, :order_subjects, only: [:index]
 
         def create
-          @subject = subject_model.create(params_for_create)
-          if @subject.valid?
-            render_subject
-          else
-            render_errors
-          end
+          run_chain(create_chain)
         end
 
         def update
-          if @subject.update(params_for_update)
-            render_subject
-          else
-            render_errors
-          end
+          run_chain(update_chain)
         end
 
         def destroy
-          if @subject.destroy
-            render_nothing
-          else
-            render_errors
-          end
+          run_chain(destroy_chain)
         end
 
         def show
-          render_subject
+          run_chain(show_chain)
         end
 
         def index
-          render_subjects
+          run_chain(index_chain)
         end
 
         protected
+
+        # CORE
+        def run_chain(chain)
+          chain.each do |action|
+            self.send(action)
+          end
+        end
+
+        # CHAINS
+        def create_chain
+          [:create_subject, :decide_what_to_render]
+        end
+
+        def update_chain
+          [:fetch_subject, :update_subject, :decide_what_to_render]
+        end
+
+        def show_chain
+          [:fetch_subject, :render_subject]
+        end
+
+        def index_chain
+          [:fetch_subjects, :paginate_subjects, :order_subjects, :render_subjects]
+        end
 
         # SUBJECT MODEL
         def subject_model
@@ -55,6 +64,22 @@ module SimpleRestAPI
 
         def subject_model_sym_plural
           subject_model.to_s.pluralize.underscore.to_sym
+        end
+
+        def create_subject
+          @subject = subject_model.create(params_for_create)
+        end
+
+        def update_subject
+          @subject.update(params_for_update)
+        end
+
+        def destroy_subject
+          if @subject.destroy
+            render_nothing
+          else
+            render_errors
+          end
         end
 
         def fetch_subject
@@ -116,6 +141,14 @@ module SimpleRestAPI
         end
 
         # RENDER
+        def decide_what_to_render
+          if @subject.valid?
+            render_subject
+          else
+            render_errors
+          end
+        end
+
         def render_subject
           render json: { subject_model_sym => @subject.as_json(only: permitted_fields_for_show) }
         end
