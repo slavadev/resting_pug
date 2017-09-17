@@ -5,7 +5,7 @@ RSpec.describe BooksController, type: :controller do
     subject { delete :destroy, params: params }
     let(:params) { { id: id } }
     let(:id) { nil }
-    let(:book) { Book.create(title: '11/22/63', author: 'Stephen King') }
+    let(:book) { create :book }
 
     before do
       subject
