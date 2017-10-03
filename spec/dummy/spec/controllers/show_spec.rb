@@ -5,7 +5,7 @@ RSpec.describe BooksController, type: :controller do
     subject { get :show, params: params }
     let(:params) { { id: id } }
     let(:id) { nil }
-    let(:book) { Book.create(title: '11/22/63', author: 'Stephen King') }
+    let(:book) { create :book }
 
     before do
       subject
@@ -25,7 +25,18 @@ RSpec.describe BooksController, type: :controller do
       end
 
       it 'returns a book' do
-        expect(response.body).to eq({ book: { id: book.id, title: '11/22/63', author: 'Stephen King', created_at: book.created_at, updated_at: book.updated_at } }.to_json)
+        expect(json_response).to eq({
+          book:
+          {
+            id: book.id,
+            title: book.title,
+            author: book.author,
+            year: book.year,
+            rating: book.rating,
+            created_at: book.created_at.as_json,
+            updated_at: book.updated_at.as_json
+          }
+        })
       end
     end
   end

@@ -51,7 +51,18 @@ RSpec.describe BooksController, type: :controller do
 
       it 'returns a book' do
         book.reload
-        expect(response.body).to eq({ book: { id: book.id, title: book_params[:title], author: book_params[:author], created_at: book.created_at, updated_at: book.updated_at } }.to_json)
+        expect(json_response).to eq({
+          book:
+          {
+            id: book.id,
+            title: params[:book][:title],
+            author: params[:book][:author],
+            year: params[:book][:year],
+            rating: params[:book][:rating],
+            created_at: book.created_at.as_json,
+            updated_at: book.updated_at.as_json
+          }
+        })
       end
     end
   end
