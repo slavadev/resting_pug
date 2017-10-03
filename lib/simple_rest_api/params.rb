@@ -19,6 +19,10 @@ module SimpleRestAPI
       permitted_fields - [:id, :created_at, :updated_at]
     end
 
+    def permitted_fields_for_sort
+      permitted_fields
+    end
+
     # PARAMS
     def params_for_create
       params.require(subject_model_sym).permit(permitted_fields_for_create)
@@ -26,6 +30,32 @@ module SimpleRestAPI
 
     def params_for_update
       params.require(subject_model_sym).permit(permitted_fields_for_update)
+    end
+
+    # SORT
+    def sort_params
+      sort_hash = nil
+      if params[:sort]
+        sort_array = []
+        sort_array = params[:sort].split(',')
+        sort_array = sort_array.map do |field|
+          is_desc = field.split('-').count > 1
+          name = field.split('-').last
+          { name: name.to_sym, is_desc: is_desc }
+        end
+        sort_array.select! do |field|
+          permitted_fields_for_sort.include? field[:name]
+        end
+        sort_array.each do |field|
+          sort_hash ||= {}
+          sort_hash[field[:name]] = field[:is_desc] ? :desc : :asc
+        end
+      end
+      sort_hash || default_sort_params
+    end
+
+    def default_sort_params
+      {id: :desc}
     end
 
     # PAGINATION

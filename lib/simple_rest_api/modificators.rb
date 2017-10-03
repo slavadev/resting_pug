@@ -6,8 +6,8 @@ module SimpleRestAPI
       @subjects = @subjects.paginate(page: pagination_params[:page], per_page: pagination_params[:per_page])
     end
 
-    def order_subjects
-      @subjects = @subjects.order(:id)
+    def sort_subjects
+      @subjects = @subjects.order(sort_params)
     end
   end
 end
