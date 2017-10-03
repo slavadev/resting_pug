@@ -65,5 +65,60 @@ RSpec.describe BooksController, type: :controller do
         })
       end
     end
+
+    context 'when permitted_fields_for_update is not default' do
+      subject do
+        expect(controller).to receive(:permitted_fields_for_update).and_return([:title, :author])
+        patch :update, params: params
+      end
+
+      let(:id) { book.id }
+      let(:book_params) { attributes_for :book }
+
+      it 'returns 200' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'returns a book with only permitted fields being updated' do
+        book.reload
+        expect(json_response).to eq({
+          book:
+          {
+            id: book.id,
+            title: params[:book][:title],
+            author: params[:book][:author],
+            year: book.year,
+            rating: book.rating,
+            created_at: book.created_at.as_json,
+            updated_at: book.updated_at.as_json
+          }
+        })
+      end
+    end
+
+    context 'when permitted_fields_for_show is not default' do
+      subject do
+        expect(controller).to receive(:permitted_fields_for_show).and_return([:id, :title, :author])
+        patch :update, params: params
+      end
+
+      let(:id) { book.id }
+      let(:book_params) { attributes_for :book }
+
+      it 'returns 200' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'returns a book only with permitted fields' do
+        expect(json_response).to eq({
+          book:
+          {
+            id: book.id,
+            title: params[:book][:title],
+            author: params[:book][:author],
+          }
+        })
+      end
+    end
   end
 end

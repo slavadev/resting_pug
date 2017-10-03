@@ -28,13 +28,13 @@ module SimpleRestAPI
       params.require(subject_model_sym).permit(permitted_fields_for_update)
     end
 
+    # PAGINATION
     def pagination_params
-      page = params[:page] || 1
-      per_page = [per_page_range[:min], params[:per_page] || per_page_default, per_page_range[:max]].sort[1]
+      page = params[:page].try(:to_i) || 1
+      per_page = [per_page_range[:min], params[:per_page].try(:to_i) || per_page_default, per_page_range[:max]].sort[1]
       return { page: page, per_page: per_page }
     end
 
-    # PAGINATION
     def per_page_range
       { min: 5, max: 100 }
     end
