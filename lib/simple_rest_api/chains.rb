@@ -19,7 +19,7 @@ module SimpleRestAPI
     end
 
     def index_chain
-      [:fetch_subjects, :sort_subjects, :paginate_subjects, :render_subjects]
+      [:fetch_subjects, :filter_subjects, :sort_subjects, :paginate_subjects, :render_subjects]
     end
   end
 end

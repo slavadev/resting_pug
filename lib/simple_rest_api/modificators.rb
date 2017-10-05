@@ -9,5 +9,9 @@ module SimpleRestAPI
     def sort_subjects
       @subjects = @subjects.order(sort_params)
     end
+
+    def filter_subjects
+      @subjects = @subjects.where(filter_params)
+    end
   end
 end

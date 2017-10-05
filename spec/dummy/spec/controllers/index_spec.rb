@@ -118,5 +118,92 @@ RSpec.describe BooksController, type: :controller do
         end
       end
     end
+
+    context 'filtering' do
+      let!(:book) { create :book, title: 'Not real title', author: 'Not real author' }
+      let!(:another_book) { create :book, title: 'Not real title', author: 'Another author' }
+
+      context 'filtering by one param' do
+        let(:params) { { filter: { title: 'Not real title' } } }
+        context 'when param is in the permitted list' do
+          subject do
+            allow(controller).to receive(:permitted_fields_for_filter).and_return([:title])
+            book; another_book
+            get :index, params: params
+          end
+
+          it 'returns filtered books' do
+            expect(response.body).to eq({ books: [another_book, book] }.to_json)
+          end
+        end
+
+        context 'when param is not in the permitted list' do
+          subject do
+            allow(controller).to receive(:permitted_fields_for_filter).and_return([:author])
+            book; another_book
+            get :index, params: params
+          end
+
+          it 'returns all books' do
+            expect(response.body).to eq({ books: [another_book, book] + books.reverse.first(8) }.to_json)
+          end
+        end
+      end
+
+      context 'filtering by array' do
+        let(:params) { { filter: { author: ['Not real author', 'Another author'] } } }
+        context 'when param is in the permitted list' do
+          subject do
+            allow(controller).to receive(:permitted_fields_for_filter).and_return([:author])
+            book; another_book
+            get :index, params: params
+          end
+
+          it 'returns filtered books' do
+            expect(response.body).to eq({ books: [another_book, book] }.to_json)
+          end
+        end
+
+        context 'when param is not in the permitted list' do
+          subject do
+            allow(controller).to receive(:permitted_fields_for_filter).and_return([:title])
+            book; another_book
+            get :index, params: params
+          end
+
+          it 'returns all books' do
+            expect(response.body).to eq({ books: [another_book, book] + books.reverse.first(8) }.to_json)
+          end
+        end
+      end
+
+
+      context 'filtering by multiple params' do
+        let(:params) { { filter: { title: 'Not real title', author: 'Not real author' } } }
+        context 'when params is in the permitted list' do
+          subject do
+            allow(controller).to receive(:permitted_fields_for_filter).and_return([:title, :author])
+            book; another_book
+            get :index, params: params
+          end
+
+          it 'returns filtered books' do
+            expect(response.body).to eq({ books: [book] }.to_json)
+          end
+        end
+
+        context 'when one param is not in the permitted list' do
+          subject do
+            allow(controller).to receive(:permitted_fields_for_filter).and_return([:title])
+            book; another_book
+            get :index, params: params
+          end
+
+          it 'returns filtered books for one param' do
+            expect(response.body).to eq({ books: [another_book, book] }.to_json)
+          end
+        end
+      end
+    end
   end
 end

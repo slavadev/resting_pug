@@ -23,6 +23,18 @@ module SimpleRestAPI
       permitted_fields
     end
 
+    def permitted_fields_for_filter
+      permitted_fields - [:created_at, :updated_at]
+    end
+
+    def permitted_fields_for_filter_arrays
+      permitted_fields_for_filter.map { |field| { field => [] } }
+    end
+
+    def permitted_fields_for_filter_with_arrays
+      permitted_fields_for_filter + permitted_fields_for_filter_arrays
+    end
+
     # PARAMS
     def params_for_create
       params.require(subject_model_sym).permit(permitted_fields_for_create)
@@ -32,11 +44,15 @@ module SimpleRestAPI
       params.require(subject_model_sym).permit(permitted_fields_for_update)
     end
 
+    # FILTERING
+    def filter_params
+      params[:filter] ? params.require(:filter).permit(permitted_fields_for_filter_with_arrays) : nil
+    end
+
     # SORT
     def sort_params
       sort_hash = nil
       if params[:sort]
-        sort_array = []
         sort_array = params[:sort].split(',')
         sort_array = sort_array.map do |field|
           is_desc = field.split('-').count > 1
