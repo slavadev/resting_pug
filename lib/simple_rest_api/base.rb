@@ -7,7 +7,10 @@ require_relative './modificators'
 require 'will_paginate/active_record'
 
 module SimpleRestAPI
+  # Main module
   module Base
+    # Includes all methods in controller
+    # @param base [ActionController::Base]
     def self.included(base)
       base.class_eval do
         include SimpleRestAPI::Actions
