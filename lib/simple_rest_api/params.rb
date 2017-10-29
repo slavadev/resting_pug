@@ -161,7 +161,7 @@ module SimpleRestAPI
     # PAGINATION
 
     # Handles pagination params and return a hash like { page: 1, per_page: 10 }
-    # @note Override {#per_page_range} to set minimum and maximum per_page param
+    # @note Override {#per_page_range} to set minimum and maximum per_page param.
     #   Override {#per_page_default} to set default per_page param.
     # @used_in {Modificators#paginate_subjects}
     # @use {#per_page_range}
