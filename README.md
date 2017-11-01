@@ -1,8 +1,29 @@
-# RestingPug
-Short description and motivation.
+
+<h1 align="center">
+  <br>
+  <a href="https://korolvs.github.com/resting_pug"><img src="https://korolvs.github.com/resting_pug/resting_pug.png" alt="Markdownify" width="80%"></a>
+  <br>
+</h1>
+
+# Basic Overview
+Resting Pug allows you to create a JSON API with just adding one line to your controller and fully customize it with overriding small and simple helper methods.
 
 ## Usage
-How to use my plugin.
+Include ```RestingPug::Base``` into controller to add CRUD actions to it:
+
+```ruby
+class BooksController < ApplicationController
+  include RestingPug::Base
+end
+```
+
+You can add CRUD actions to all controller by including this module into ```ApplicationController```:
+
+```ruby
+class ApplicationController < ActionController::Base
+  include RestingPug::Base
+end
+```
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -16,13 +37,10 @@ And then execute:
 $ bundle
 ```
 
-Or install it yourself as:
-```bash
-$ gem install resting_pug
-```
-
 ## Contributing
 Contribution directions go here.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
+Pug logo is [Designed by Freepik](https://www.freepik.com/free-vector/happy-pug-resting-on-the-sofa_1357299.htm)
