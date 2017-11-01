@@ -1,4 +1,4 @@
-module SimpleRestAPI
+module RestingPug
   # Describes basic CRUD actions
   # @see https://en.wikipedia.org/wiki/Create,_read,_update_and_delete
   # @used_in {Base.included}

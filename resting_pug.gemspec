@@ -1,17 +1,17 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "simple_rest_api/version"
+require "resting_pug/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "simple_rest_api"
-  s.version     = SimpleRestAPI::VERSION
+  s.name        = "resting_pug"
+  s.version     = RestingPug::VERSION
   s.authors     = ["Slava Korolev"]
   s.email       = ["korolvs@gmail.com"]
-  s.homepage    = "https://github.com/korolvs/simple_rest_api"
-  s.summary     = "Summary of SimpleRestApi."
-  s.description = "Description of SimpleRestApi."
+  s.homepage    = "https://github.com/korolvs/resting_pug"
+  s.summary     = "Summary of RestingPug."
+  s.description = "Description of RestingPug."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]

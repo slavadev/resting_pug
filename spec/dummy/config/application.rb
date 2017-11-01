@@ -11,7 +11,7 @@ require "action_cable/engine"
 require "sprockets/railtie"
 
 Bundler.require(*Rails.groups)
-require "simple_rest_api"
+require "resting_pug"
 
 module Dummy
   class Application < Rails::Application

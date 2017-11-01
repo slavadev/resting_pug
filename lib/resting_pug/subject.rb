@@ -1,4 +1,4 @@
-module SimpleRestAPI
+module RestingPug
   # Defines everything related to subject basic operations(creation, updating etc)
   # @used_in {Base.included}
   module Subject

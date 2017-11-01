@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simple_rest_api (0.1.0)
+    resting_pug (0.1.0)
       will_paginate
 
 GEM
@@ -139,9 +139,9 @@ DEPENDENCIES
   factory_girl
   faker
   rails (~> 5.1.2)
+  resting_pug!
   rspec-rails
   shoulda-matchers
-  simple_rest_api!
   sqlite3
 
 BUNDLED WITH

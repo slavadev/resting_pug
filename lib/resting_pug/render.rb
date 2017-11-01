@@ -1,4 +1,4 @@
-module SimpleRestAPI
+module RestingPug
   # Contains methods responsible for rendering response
   # @used_in {Base.included}
   module Render

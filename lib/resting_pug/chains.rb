@@ -1,4 +1,4 @@
-module SimpleRestAPI
+module RestingPug
   # Describes chains of methods for actions. Each chain is an array of methods running one by one.
   # @used_in {Base.included}
   module Chains

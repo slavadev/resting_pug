@@ -1,4 +1,4 @@
-module SimpleRestAPI
+module RestingPug
   # Describes transformations with params
   # @used_in {Base.included}
   module Params

@@ -1,4 +1,4 @@
-module SimpleRestAPI
+module RestingPug
   # Describes methods which modificate subject/subjects
   # @used_in {Base.included}
   module Modificators

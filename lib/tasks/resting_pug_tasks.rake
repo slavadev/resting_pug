@@ -1,4 +1,4 @@
 # desc "Explaining what the task does"
-# task :simple_rest_api do
+# task :resting_pug do
 #   # Task goes here
 # end

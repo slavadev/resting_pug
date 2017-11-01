@@ -1,3 +1,3 @@
 class BooksController < ApplicationController
-  include SimpleRestAPI::Base
+  include RestingPug::Base
 end

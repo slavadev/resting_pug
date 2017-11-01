@@ -6,19 +6,19 @@ require_relative './params'
 require_relative './modificators'
 require 'will_paginate/active_record'
 
-module SimpleRestAPI
+module RestingPug
   # Main module
   module Base
     # Includes all methods in controller
     # @param base [ActionController::Base]
     def self.included(base)
       base.class_eval do
-        include SimpleRestAPI::Actions
-        include SimpleRestAPI::Chains
-        include SimpleRestAPI::Render
-        include SimpleRestAPI::Subject
-        include SimpleRestAPI::Params
-        include SimpleRestAPI::Modificators
+        include RestingPug::Actions
+        include RestingPug::Chains
+        include RestingPug::Render
+        include RestingPug::Subject
+        include RestingPug::Params
+        include RestingPug::Modificators
 
         rescue_from ActionController::ParameterMissing, with: :render_param_missing
         rescue_from ActiveRecord::RecordNotFound, with: :render_not_found

@@ -1,4 +1,4 @@
-# SimpleRestAPI
+# RestingPug
 Short description and motivation.
 
 ## Usage
@@ -8,7 +8,7 @@ How to use my plugin.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'simple_rest_api'
+gem 'resting_pug'
 ```
 
 And then execute:
@@ -18,7 +18,7 @@ $ bundle
 
 Or install it yourself as:
 ```bash
-$ gem install simple_rest_api
+$ gem install resting_pug
 ```
 
 ## Contributing
