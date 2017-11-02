@@ -5,6 +5,7 @@
   <br>
 </h1>
 
+[![Gem Version](https://badge.fury.io/rb/resting_pug.svg)](https://badge.fury.io/rb/resting_pug)
 # Basic Overview
 Resting Pug allows you to create a JSON API with just adding one line to your controller and fully customize it with overriding small and simple helper methods.
 
