@@ -1,7 +1,7 @@
 
 <h1 align="center">
   <br>
-  <a href="https://korolvs.github.com/resting_pug"><img src="https://korolvs.github.com/resting_pug/resting_pug.png" alt="Markdownify" width="80%"></a>
+  <a href="https://korolvs.github.com/resting_pug"><img src="https://korolvs.github.com/resting_pug/logo.svg" alt="Logo" width="80%"></a>
   <br>
 </h1>
 
