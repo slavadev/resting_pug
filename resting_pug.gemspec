@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.version     = RestingPug::VERSION
   s.authors     = ["Slava Korolev"]
   s.email       = ["korolvs@gmail.com"]
-  s.homepage    = "https://github.com/korolvs/resting_pug"
-  s.summary     = "Summary of RestingPug."
+  s.homepage    = "https://korolvs.github.io/resting_pug/"
+  s.summary     = "A simple and fully customizable way to create an API in your Rails application."
   s.description = "Description of RestingPug."
   s.license     = "MIT"
 
