@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     resting_pug (0.1.0)
-      will_paginate
+      will_paginate (~> 3)
 
 GEM
   remote: https://rubygems.org/
@@ -136,13 +136,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  factory_girl
-  faker
-  rails (~> 5.1.2)
+  factory_girl (~> 4.8)
+  faker (~> 1.8)
+  rails (~> 5.1)
   resting_pug!
-  rspec-rails
-  shoulda-matchers
-  sqlite3
+  rspec-rails (~> 3.6)
+  shoulda-matchers (~> 3.1)
+  sqlite3 (~> 1.3)
 
 BUNDLED WITH
    1.15.2
