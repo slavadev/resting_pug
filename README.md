@@ -17,11 +17,19 @@ class BooksController < ApplicationController
 end
 ```
 
-You can add CRUD actions to all controller by including this module into ```ApplicationController```:
+You can add CRUD actions to all controllers by including this module into ```ApplicationController```:
 
 ```ruby
 class ApplicationController < ActionController::Base
   include RestingPug::Base
+end
+```
+
+Don't forget to add a route to ```config/routes.rb``` 
+
+```ruby
+Rails.application.routes.draw do
+  resources :books
 end
 ```
 
@@ -43,4 +51,4 @@ Contribution directions go here.
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
-Pug logo is [Designed by Freepik](https://www.freepik.com/free-vector/happy-pug-resting-on-the-sofa_1357299.htm)
+Logo is [Designed by Freepik](https://www.freepik.com/free-vector/happy-pug-resting-on-the-sofa_1357299.htm)
