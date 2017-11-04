@@ -22,13 +22,13 @@ module RestingPug
     #     }
     #   }
     # @note You can sustomize creating action:
-    #   - override {Subject#subject_model} to set what model will be created
-    #   - override {Chains#create_chain} to add or remove methods which will be called while creating a subject
     #   - override {Params#permitted_fields_for_create} to set which params can be set in a new subject
     #   - override {Params#permitted_fields_for_show} to set which params will be shown in response
-    #   - override {Render#decide_what_to_render} to set how it will be decided what to render in response
     #   - override {Render#render_subject} to set how subject will be rendered
     #   - override {Render#render_errors} to set how errors will be rendered
+    #   - override {Subject#subject_model} to set what model will be created
+    #   - override {Chains#create_chain} to add or remove methods which will be called while creating a subject
+    #   - override {Render#decide_what_to_render} to set how it will be decided what to render in response
     # @use {#run_chain}
     # @use {Chains#create_chain}
     def create
@@ -53,14 +53,14 @@ module RestingPug
     #     }
     #   }
     # @note You can sustomize creating action:
-    #   - override {Subject#subject_model} to set what model will be updated
-    #   - override {Chains#update_chain} to add or remove methods which will be called while updating a subject
     #   - override {Params#permitted_fields_for_update} to set which params can be updated
     #   - override {Params#permitted_fields_for_show} to set which params will be shown in response
-    #   - override {Render#decide_what_to_render} to set how it will be decided what to render in response
     #   - override {Render#render_subject} to set how subject will be rendered
     #   - override {Render#render_errors} to set how errors will be rendered
     #   - override {Render#render_not_found} to set what to render when subject with ID from params is not found
+    #   - override {Subject#subject_model} to set what model will be updated
+    #   - override {Chains#update_chain} to add or remove methods which will be called while updating a subject
+    #   - override {Render#decide_what_to_render} to set how it will be decided what to render in response
     # @use {#run_chain}
     # @use {Chains#update_chain}
     def update
@@ -75,12 +75,12 @@ module RestingPug
     #   Response:
     #   204 No Content
     # @note You can sustomize creating action:
-    #   - override {Subject#subject_model} to set what model will be deleted
-    #   - override {Chains#destroy_chain} to add or remove methods which will be called while deleting a subject
     #   - override {Subject#destroy_subject} to set how it will be destroyed
     #   - override {Render#render_nothing} to set what to render when subject is destroyed
     #   - override {Render#render_errors} to set how errors will be rendered
     #   - override {Render#render_not_found} to set what to render when subject with ID from params is not found
+    #   - override {Subject#subject_model} to set what model will be deleted
+    #   - override {Chains#destroy_chain} to add or remove methods which will be called while deleting a subject
     # @use {#run_chain}
     # @use {Chains#destroy_chain}
     def destroy
@@ -102,11 +102,11 @@ module RestingPug
     #     }
     #   }
     # @note You can sustomize creating action:
-    #   - override {Subject#subject_model} to set what model will be shown
-    #   - override {Chains#show_chain} to add or remove methods which will be called while updating a subject
     #   - override {Params#permitted_fields_for_show} to set which params will be shown in response
     #   - override {Render#render_subject} to set how subject will be rendered
     #   - override {Render#render_not_found} to set what to render when subject with ID from params is not found
+    #   - override {Subject#subject_model} to set what model will be shown
+    #   - override {Chains#show_chain} to add or remove methods which will be called while updating a subject
     # @use {#run_chain}
     # @use {Chains#show_chain}
     def show
@@ -140,8 +140,6 @@ module RestingPug
     #     }]
     #   }
     # @note You can sustomize creating action:
-    #   - override {Subject#subject_model} to set what model will be shown
-    #   - override {Chains#index_chain} to add or remove methods which will be called while updating a subject
     #   - override {Params#permitted_fields_for_show} to set which params will be shown in response
     #   - override {Params#permitted_fields_for_filter} to set which params can be used for filtering
     #   - override {Params#permitted_fields_for_sort} to set which params can be used for sorting
@@ -149,6 +147,8 @@ module RestingPug
     #   - override {Params#per_page_default} to set default per_page param
     #   - override {Params#per_page_range} to set minimum and maximum possible per_page value
     #   - override {Render#render_subjects} to set how subjects will be rendered
+    #   - override {Subject#subject_model} to set what model will be shown
+    #   - override {Chains#index_chain} to add or remove methods which will be called while updating a subject
     # @use {#run_chain}
     # @use {Chains#index_chain}
     def index
