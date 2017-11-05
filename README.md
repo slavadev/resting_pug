@@ -19,6 +19,7 @@
   - [Show](#show)
   - [Index](#index)
 - [Contributing](#contributing)
+- [Changelog](#changelog)
 - [License](#license)
 
 ## What is Resting Pug?
@@ -243,6 +244,9 @@ Things you can customize:
 
 ## Contributing
 Contribution directions go here.
+
+## Changelog
+To see what has changed in recent versions of Resting Pug, see the [CHANGELOG](CHANGELOG.md).
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
