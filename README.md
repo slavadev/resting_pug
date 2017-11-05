@@ -9,6 +9,7 @@
 ## Table of Contents
 
 - [What is Resting Pug?](#what-is-resting-pug)
+- [Why should I use it?](#why-should-i-use-it)
 - [Installation](#installation)
 - [Usage](#usage )
   - [Create](#create)
@@ -19,8 +20,10 @@
 - [Contributing](#contributing)
 - [License](#license)
 
-# What is Resting Pug?
+## What is Resting Pug?
 Resting Pug allows you to create a JSON API with just adding one line to your controller and fully customize it with overriding small and simple helper methods.
+
+## Why should I use it?
 
 ## Installation
 Add this line to your application's Gemfile:
