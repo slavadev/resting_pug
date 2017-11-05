@@ -5,7 +5,7 @@ module RestingPug
     protected
 
     # Calls {#render_subject} if subject is valid and {#render_errors} otherwise
-    # @note Override {#render_subject} and {#render_errors} to change rendering behaviour
+    # @note Override {#render_subject render_subject} and {#render_errors render_errors} to change rendering behaviour
     # @used_in {Chains#create_chain}
     # @used_in {Chains#update_chain}
     # @use {#render_subject}
@@ -20,8 +20,8 @@ module RestingPug
 
     # Renders json with a subject
     # @note Override this method to add more complicated logic of rendering.
-    #   Override {Subject#subject_model_sym} to change root attribute.
-    #   Override {Params#permitted_fields_for_show} to change shown attributes.
+    #   Override {Subject#subject_model_sym subject_model_sym} to change root attribute.
+    #   Override {Params#permitted_fields_for_show permitted_fields_for_show} to change shown attributes.
     # @used_in {#decide_what_to_render}
     # @used_in {Chains#show_chain}
     # @use {Subject#subject_model_sym}
@@ -32,8 +32,8 @@ module RestingPug
 
     # Renders json with subjects
     # @note Override this method to add more complicated logic of rendering.
-    #   Override {Subject#subject_model_sym_plural} to change root attribute.
-    #   Override {Params#permitted_fields_for_show} to change shown attributes.
+    #   Override {Subject#subject_model_sym_plural subject_model_sym_plural} to change root attribute.
+    #   Override {Params#permitted_fields_for_show permitted_fields_for_show} to change shown attributes.
     # @used_in {Chains#index_chain}
     # @use {Subject#subject_model_sym_plural}
     # @use {Params#permitted_fields_for_show}

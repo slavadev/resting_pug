@@ -90,8 +90,8 @@ module RestingPug
     # PARAMS
 
     # Returns strong parameters which are used in creating action
-    # @note Override {#permitted_fields_for_create} to set allowed fields.
-    #   Override {Subject#subject_model_sym} to change the root attrubute of params.
+    # @note Override {#permitted_fields_for_create permitted_fields_for_create} to set allowed fields.
+    #   Override {Subject#subject_model_sym subject_model_sym} to change the root attrubute of params.
     # @see http://guides.rubyonrails.org/action_controller_overview.html#strong-parameters
     # @used_in {Subject#create_subject}
     # @use {Subject#subject_model_sym}
@@ -101,8 +101,8 @@ module RestingPug
     end
 
     # Returns strong parameters which are used in updating action
-    # @note Override {#permitted_fields_for_update} to set allowed fields.
-    #   Override {Subject#subject_model_sym} to change the root attrubute of params.
+    # @note Override {#permitted_fields_for_update permitted_fields_for_update} to set allowed fields.
+    #   Override {Subject#subject_model_sym subject_model_sym} to change the root attrubute of params.
     # @see http://guides.rubyonrails.org/action_controller_overview.html#strong-parameters
     # @used_in {Subject#update_subject}
     # @use {Subject#subject_model_sym}
@@ -114,7 +114,7 @@ module RestingPug
     # FILTERING
 
     # Returns strong parameters which are used for filtering subjects
-    # @note Override {#permitted_fields_for_filter} and {permitted_fields_for_filter_arrays} to set allowed fields.
+    # @note Override {#permitted_fields_for_filter permitted_fields_for_filter} and {#permitted_fields_for_filter_arrays permitted_fields_for_filter_arrays} to set allowed fields.
     # @see http://guides.rubyonrails.org/action_controller_overview.html#strong-parameters
     # @used_in {Modificators#filter_subjects}
     # @use {#permitted_fields_for_filter_with_arrays}
@@ -125,8 +125,8 @@ module RestingPug
     # SORT
 
     # Transforms a string like "-id,name" to a hash { id: :desc, name: :asc }
-    # @note Override {#permitted_fields_for_sort} to set allowed fields to sort.
-    #   Override {#default_sort_params} to set default sort params.
+    # @note Override {#permitted_fields_for_sort permitted_fields_for_sort} to set allowed fields to sort.
+    #   Override {#default_sort_params default_sort_params} to set default sort params.
     # @used_in {Modificators#sort_subjects}
     # @use {#permitted_fields_for_sort}
     # @use {#default_sort_params}
@@ -151,7 +151,7 @@ module RestingPug
     end
 
     # Returns a hash with default sorting params
-    # @note Override {#permitted_fields_for_sort} to set allowed fields to sort.
+    # @note Override {#permitted_fields_for_sort permitted_fields_for_sort} to set allowed fields to sort.
     # @see http://guides.rubyonrails.org/active_record_querying.html#ordering
     # @used_in {#sort_params}
     def default_sort_params
@@ -161,8 +161,8 @@ module RestingPug
     # PAGINATION
 
     # Handles pagination params and return a hash like { page: 1, per_page: 10 }
-    # @note Override {#per_page_range} to set minimum and maximum per_page param.
-    #   Override {#per_page_default} to set default per_page param.
+    # @note Override {#per_page_range per_page_range} to set minimum and maximum per_page param.
+    #   Override {#per_page_default per_page_default} to set default per_page param.
     # @used_in {Modificators#paginate_subjects}
     # @use {#per_page_range}
     # @use {#per_page_default}
@@ -173,15 +173,15 @@ module RestingPug
     end
 
     # Returns a hash minimum and maximum per_page param like { page: 1, per_page: 10 }
-    # @note Override {#per_page_default} to set default per_page param.
-    # @used_in {#pagination_params}
+    # @note Override {#per_page_default per_page_default} to set default per_page param.
+    # @used_in {#pagination_params pagination_params}
     def per_page_range
       { min: 5, max: 100 }
     end
 
     # Returns a default per_page param
-    # @note Override {#per_page_range} to set minimum and maximum per_page param
-    # @used_in {#pagination_params}
+    # @note Override {#per_page_range per_page_range} to set minimum and maximum per_page param
+    # @used_in {#pagination_params pagination_params}
     def per_page_default
       10
     end

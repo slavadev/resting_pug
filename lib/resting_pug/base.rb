@@ -6,6 +6,7 @@ require_relative './params'
 require_relative './modificators'
 require 'will_paginate/active_record'
 
+# A simple and fully customizable way to create an API in your Rails application 
 module RestingPug
   # Main module
   module Base
