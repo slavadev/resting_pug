@@ -11,7 +11,8 @@
 - [What is Resting Pug?](#what-is-resting-pug)
 - [Why should I use it?](#why-should-i-use-it)
 - [Installation](#installation)
-- [Usage](#usage )
+- [Usage](#usage)
+- [Created actions and thing that you can customize](#created-actions-and-things-you-can-customize)
   - [Create](#create)
   - [Update](#update)
   - [Destroy](#destroy)
@@ -24,6 +25,10 @@
 Resting Pug allows you to create a JSON API with just adding one line to your controller and fully customize it with overriding small and simple helper methods.
 
 ## Why should I use it?
+Often when you want to try a new idea or create a simple app you want to implement basic features very fast.
+Resting Pig allows you to do it with just couple lines of code.
+But even though it is small and simple(and because it is small and simple) you can vastly customize created API.
+Attributes user can see, attributes user can edit, number of items on page, how to render items and errors - thats just a small part of things you can change overriding basic Resting Pug methods.
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -38,7 +43,32 @@ $ bundle
 ```
 
 ## Usage
-Include ```RestingPug::Base``` into controller to add CRUD actions to it:
+
+**1. Create a model that will be accesible through API:**
+
+```ruby
+class Book < ApplicationRecord
+  validates :title, presence: true, length: { minimum: 3 }
+  validates :author, presence: true, length: { minimum: 3 }
+end
+```
+
+```ruby
+class CreateBooks < ActiveRecord::Migration
+  def change
+    create_table :books do |t|
+      t.string :title
+      t.string :author
+      t.integer :year
+      t.integer :rating
+
+      t.timestamps
+    end
+  end
+end
+```
+
+**2. Create a new controller and include ```RestingPug::Base``` into it to add CRUD actions:**
 
 ```ruby
 class BooksController < ApplicationController
@@ -54,7 +84,7 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-Don't forget to add a route to ```config/routes.rb``` 
+**3. Don't forget to add a route to ```config/routes.rb```**
 
 ```ruby
 Rails.application.routes.draw do
@@ -62,6 +92,9 @@ Rails.application.routes.draw do
 end
 ```
 
+**4. Enjoy your new API and don't hesitate to change it whatever you want!**
+
+## Created actions and things that you can customize
 Actions created after including ```RestingPug::Base```:
 
 ### Create
@@ -87,13 +120,13 @@ Response:
 
 Things you can customize:
 
-- override [Params#permitted_fields_for_create](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#permitted_fields_for_create-instance_method) to set which params can be set in a new subject
-- override [Params#permitted_fields_for_show](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#permitted_fields_for_show-instance_method) to set which params will be shown in response
-- override [Render#render_subject](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_subject-instance_method) to set how subject will be rendered
-- override [Render#render_errors](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_errors-instance_method) to set how errors will be rendered
-- override [Subject#subject_model](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Subject#subject_model-instance_method) to set what model will be created
-- override [Chains#create_chain](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Chains#create_chain-instance_method) to add or remove methods which will be called while creating a subject
-- override [Render#decide_what_to_render](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#decide_what_to_render-instance_method) to set how it will be decided what to render in response
+- override [permitted_fields_for_create](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#permitted_fields_for_create-instance_method) to set which params can be set in a new subject
+- override [permitted_fields_for_show](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#permitted_fields_for_show-instance_method) to set which params will be shown in response
+- override [render_subject](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_subject-instance_method) to set how subject will be rendered
+- override [render_errors](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_errors-instance_method) to set how errors will be rendered
+- override [subject_model](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Subject#subject_model-instance_method) to set what model will be created
+- override [create_chain](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Chains#create_chain-instance_method) to add or remove methods which will be called while creating a subject
+- override [decide_what_to_render](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#decide_what_to_render-instance_method) to set how it will be decided what to render in response
 
 ### Update
 
@@ -117,14 +150,14 @@ Response:
 
 Things you can customize:
 
-- override [Params#permitted_fields_for_update](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#permitted_fields_for_update-instance_method) to set which params can be updated
-- override [Params#permitted_fields_for_show](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#permitted_fields_for_show-instance_method) to set which params will be shown in response
-- override [Render#render_subject](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_subject-instance_method) to set how subject will be rendered
-- override [Render#render_errors](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_errors-instance_method) to set how errors will be rendered
-- override [Render#render_not_found](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_not_found-instance_method) to set what to render when subject with ID from params is not found
-- override [Subject#subject_model](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Subject#subject_model-instance_method) to set what model will be updated
-- override [Chains#update_chain](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Chains#update_chain-instance_method) to add or remove methods which will be called while updating a subject
-- override [Render#decide_what_to_render](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#decide_what_to_render-instance_method) to set how it will be decided what to render in response
+- override [permitted_fields_for_update](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#permitted_fields_for_update-instance_method) to set which params can be updated
+- override [permitted_fields_for_show](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#permitted_fields_for_show-instance_method) to set which params will be shown in response
+- override [render_subject](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_subject-instance_method) to set how subject will be rendered
+- override [render_errors](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_errors-instance_method) to set how errors will be rendered
+- override [render_not_found](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_not_found-instance_method) to set what to render when subject with ID from params is not found
+- override [subject_model](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Subject#subject_model-instance_method) to set what model will be updated
+- override [update_chain](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Chains#update_chain-instance_method) to add or remove methods which will be called while updating a subject
+- override [decide_what_to_render](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#decide_what_to_render-instance_method) to set how it will be decided what to render in response
 
 ### Destroy
 
@@ -138,12 +171,12 @@ Response:
 
 Things you can customize:
 
-- override [Subject#destroy_subject](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Subject#destroy_subject-instance_method) to set how it will be destroyed
-- override [Render#render_nothing](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_nothing-instance_method) to set what to render when subject is destroyed
-- override [Render#render_errors](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_errors-instance_method) to set how errors will be rendered
-- override [Render#render_not_found](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_not_found-instance_method) to set what to render when subject with ID from params is not found
-- override [Subject#subject_model](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Subject#subject_model-instance_method) to set what model will be deleted
-- override [Chains#destroy_chain](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Chains#destroy_chain-instance_method) to add or remove methods which will be called while deleting a subject
+- override [destroy_subject](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Subject#destroy_subject-instance_method) to set how it will be destroyed
+- override [render_nothing](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_nothing-instance_method) to set what to render when subject is destroyed
+- override [render_errors](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_errors-instance_method) to set how errors will be rendered
+- override [render_not_found](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_not_found-instance_method) to set what to render when subject with ID from params is not found
+- override [subject_model](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Subject#subject_model-instance_method) to set what model will be deleted
+- override [destroy_chain](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Chains#destroy_chain-instance_method) to add or remove methods which will be called while deleting a subject
 
 ### Show
 
@@ -164,11 +197,11 @@ Response:
 
 Things you can customize:
 
-- override [Params#permitted_fields_for_show](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#permitted_fields_for_show-instance_method) to set which params will be shown in response
-- override [Render#render_subject](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_subject-instance_method) to set how subject will be rendered
-- override [Render#render_not_found](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_not_found-instance_method) to set what to render when subject with ID from params is not found
-- override [Subject#subject_model](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Subject#subject_model-instance_method) to set what model will be shown
-- override [Chains#show_chain](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Chains#show_chain-instance_method) to add or remove methods which will be called while updating a subject
+- override [permitted_fields_for_show](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#permitted_fields_for_show-instance_method) to set which params will be shown in response
+- override [render_subject](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_subject-instance_method) to set how subject will be rendered
+- override [render_not_found](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_not_found-instance_method) to set what to render when subject with ID from params is not found
+- override [subject_model](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Subject#subject_model-instance_method) to set what model will be shown
+- override [show_chain](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Chains#show_chain-instance_method) to add or remove methods which will be called while updating a subject
 
 ### Index
 
@@ -198,15 +231,15 @@ Response:
 
 Things you can customize:
 
-- override [Params#permitted_fields_for_show](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#permitted_fields_for_show-instance_method) to set which params will be shown in response
-- override [Params#permitted_fields_for_filter](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#permitted_fields_for_filter-instance_method) to set which params can be used for filtering
-- override [Params#permitted_fields_for_sort](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#permitted_fields_for_sort-instance_method) to set which params can be used for sorting
-- override [Params#default_sort_params](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#default_sort_params-instance_method) to set default sort params
-- override [Params#per_page_default](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#per_page_default-instance_method) to set default per_page param
-- override [Params#per_page_range](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#per_page_range-instance_method) to set minimum and maximum possible per_page value
-- override [Render#render_subjects](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_subjects-instance_method) to set how subjects will be rendered
-- override [Subject#subject_model](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Subject#subject_model-instance_method) to set what model will be shown
-- override [Chains#index_chain](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Chains#index_chain-instance_method) to add or remove methods which will be called while updating a subject
+- override [permitted_fields_for_show](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#permitted_fields_for_show-instance_method) to set which params will be shown in response
+- override [permitted_fields_for_filter](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#permitted_fields_for_filter-instance_method) to set which params can be used for filtering
+- override [permitted_fields_for_sort](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#permitted_fields_for_sort-instance_method) to set which params can be used for sorting
+- override [default_sort_params](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#default_sort_params-instance_method) to set default sort params
+- override [per_page_default](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#per_page_default-instance_method) to set default per_page param
+- override [per_page_range](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Params#per_page_range-instance_method) to set minimum and maximum possible per_page value
+- override [render_subjects](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_subjects-instance_method) to set how subjects will be rendered
+- override [subject_model](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Subject#subject_model-instance_method) to set what model will be shown
+- override [index_chain](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Chains#index_chain-instance_method) to add or remove methods which will be called while updating a subject
 
 ## Contributing
 Contribution directions go here.
