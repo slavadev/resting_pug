@@ -6,8 +6,33 @@
 </h1>
 
 [![Gem Version](https://badge.fury.io/rb/resting_pug.svg)](https://badge.fury.io/rb/resting_pug)
-# Basic Overview
+## Table of Contents
+
+- [What is Resting Pug?](#what-is-resting-pug)
+- [Installation](#installation)
+- [Usage](#usage )
+  - [Create](#create)
+  - [Update](#update)
+  - [Destroy](#destroy)
+  - [Show](#show)
+  - [Index](#index)
+- [Contributing](#contributing)
+- [License](#license)
+
+# What is Resting Pug?
 Resting Pug allows you to create a JSON API with just adding one line to your controller and fully customize it with overriding small and simple helper methods.
+
+## Installation
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'resting_pug'
+```
+
+And then execute:
+```bash
+$ bundle
+```
 
 ## Usage
 Include ```RestingPug::Base``` into controller to add CRUD actions to it:
@@ -179,18 +204,6 @@ Things you can customize:
 - override [Render#render_subjects](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Render#render_subjects-instance_method) to set how subjects will be rendered
 - override [Subject#subject_model](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Subject#subject_model-instance_method) to set what model will be shown
 - override [Chains#index_chain](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Chains#index_chain-instance_method) to add or remove methods which will be called while updating a subject
-
-## Installation
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'resting_pug'
-```
-
-And then execute:
-```bash
-$ bundle
-```
 
 ## Contributing
 Contribution directions go here.
