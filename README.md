@@ -243,7 +243,9 @@ Things you can customize:
 - override [index_chain](http://www.rubydoc.info/github/korolvs/resting_pug/RestingPug/Chains#index_chain-instance_method) to add or remove methods which will be called while updating a subject
 
 ## Contributing
-Contribution directions go here.
+You're encouraged to submit [pull requests](https://github.com/korolvs/resting_pug/pulls), [propose features and discuss issues](https://github.com/korolvs/resting_pug/issues).
+
+See [CONTRIBUTING](CONTRIBUTING.md)
 
 ## Changelog
 To see what has changed in recent versions of Resting Pug, see the [CHANGELOG](CHANGELOG.md).
