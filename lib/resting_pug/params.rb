@@ -15,6 +15,16 @@ module RestingPug
     # @used_in {#permitted_fields_for_sort}
     # @used_in {#permitted_fields_for_filter}
     # @use {Subject#subject_model}
+    # @example
+    #   class BooksController < ApplicationController
+    #     include RestingPug::Base
+    #
+    #     private
+    #     # Override a permitted_fields method to use only :id and :title
+    #     def permitted_fields
+    #       [:id, :title]
+    #     end
+    #   end
     def permitted_fields
       subject_model.column_names.map(&:to_sym)
     end
@@ -25,6 +35,16 @@ module RestingPug
     # @used_in {Render#render_subject}
     # @used_in {Render#render_subjects}
     # @use {#permitted_fields}
+    # @example
+    #   class BooksController < ApplicationController
+    #     include RestingPug::Base
+    #
+    #     private
+    #     # Override a permitted_fields_for_show method to show every permitted attribute except :title
+    #     def permitted_fields_for_show
+    #       permitted_fields - [:title]
+    #     end
+    #   end
     def permitted_fields_for_show
       permitted_fields
     end
@@ -34,6 +54,16 @@ module RestingPug
     # @return [Array] of symbols representing attributes
     # @used_in {#params_for_create}
     # @use {#permitted_fields}
+    # @example
+    #   class BooksController < ApplicationController
+    #     include RestingPug::Base
+    #
+    #     private
+    #     # Override a permitted_fields_for_create method to use every permitted attribute except :title
+    #     def permitted_fields_for_create
+    #       permitted_fields - [:title]
+    #     end
+    #   end
     def permitted_fields_for_create
       permitted_fields - [:id, :created_at, :updated_at]
     end
@@ -43,6 +73,16 @@ module RestingPug
     # @return [Array] of symbols representing attributes
     # @used_in {#params_for_update}
     # @use {#permitted_fields}
+    # @example
+    #   class BooksController < ApplicationController
+    #     include RestingPug::Base
+    #
+    #     private
+    #     # Override a permitted_fields_for_update method to use every permitted attribute except :title
+    #     def permitted_fields_for_update
+    #       permitted_fields - [:title]
+    #     end
+    #   end
     def permitted_fields_for_update
       permitted_fields - [:id, :created_at, :updated_at]
     end
@@ -52,6 +92,16 @@ module RestingPug
     # @return [Array] of symbols representing attributes
     # @used_in {#sort_params}
     # @use {#permitted_fields}
+    # @example
+    #   class BooksController < ApplicationController
+    #     include RestingPug::Base
+    #
+    #     private
+    #     # Override a permitted_fields_for_sort method to use every permitted attribute except :title
+    #     def permitted_fields_for_sort
+    #       permitted_fields - [:title]
+    #     end
+    #   end
     def permitted_fields_for_sort
       permitted_fields
     end
@@ -63,6 +113,16 @@ module RestingPug
     # @used_in {#permitted_fields_for_filter_arrays}
     # @used_in {#permitted_fields_for_filter_with_arrays}
     # @use {#permitted_fields}
+    # @example
+    #   class BooksController < ApplicationController
+    #     include RestingPug::Base
+    #
+    #     private
+    #     # Override a permitted_fields_for_sort method to use every permitted attribute except :title
+    #     def permitted_fields_for_sort
+    #       permitted_fields - [:title]
+    #     end
+    #   end
     def permitted_fields_for_filter
       permitted_fields - [:created_at, :updated_at]
     end
@@ -73,6 +133,16 @@ module RestingPug
     # @return [Array] of symbols representing attributes
     # @used_in {#permitted_fields_for_filter_with_arrays}
     # @use {#permitted_fields_for_filter}
+    # @example
+    #   class BooksController < ApplicationController
+    #     include RestingPug::Base
+    #
+    #     private
+    #     # Override a permitted_fields_for_filter_arrays method to use only :id and :title
+    #     def permitted_fields_for_filter_arrays
+    #       { id: [], title: []}
+    #     end
+    #   end
     def permitted_fields_for_filter_arrays
       permitted_fields_for_filter.map { |field| { field => [] } }
     end
@@ -154,6 +224,16 @@ module RestingPug
     # @note Override {#permitted_fields_for_sort permitted_fields_for_sort} to set allowed fields to sort.
     # @see http://guides.rubyonrails.org/active_record_querying.html#ordering
     # @used_in {#sort_params}
+    # @example
+    #   class BooksController < ApplicationController
+    #     include RestingPug::Base
+    #
+    #     private
+    #     # Override a default_sort_params to set default sorting to sorted descending by title
+    #     def default_sort_params
+    #       { title: :desc }
+    #     end
+    #   end
     def default_sort_params
       {id: :desc}
     end
@@ -175,6 +255,16 @@ module RestingPug
     # Returns a hash minimum and maximum per_page param like { page: 1, per_page: 10 }
     # @note Override {#per_page_default per_page_default} to set default per_page param.
     # @used_in {#pagination_params pagination_params}
+    # @example
+    #   class BooksController < ApplicationController
+    #     include RestingPug::Base
+    #
+    #     private
+    #     # Override a per_page_range to set minimum possible value for per_page 10 and maximum 20
+    #     def per_page_range
+    #       { min: 10, max: 20 }
+    #     end
+    #   end
     def per_page_range
       { min: 5, max: 100 }
     end
@@ -182,6 +272,16 @@ module RestingPug
     # Returns a default per_page param
     # @note Override {#per_page_range per_page_range} to set minimum and maximum per_page param
     # @used_in {#pagination_params pagination_params}
+    # @example
+    #   class BooksController < ApplicationController
+    #     include RestingPug::Base
+    #
+    #     private
+    #     # Override a per_page_default to set default page size to 15
+    #     def per_page_default
+    #       15
+    #     end
+    #   end
     def per_page_default
       10
     end
