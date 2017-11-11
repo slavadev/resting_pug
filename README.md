@@ -95,7 +95,7 @@ end
 
 **4. Enjoy your new API and don't hesitate to change it whatever you want!**
 
-## Created actions and things that you can customize
+## List of actions and things that you can customize
 Actions created after including ```RestingPug::Base```:
 
 ### Create

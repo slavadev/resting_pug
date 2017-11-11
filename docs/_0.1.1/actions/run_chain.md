@@ -14,11 +14,11 @@ Executes each method in a chain one by one
 - [Array] **chain** - array of methods to execute
 
 ## Used in
-- [#create](/0.1.1/actions/create)
-- [#update](/0.1.1/actions/update)
-- [#destroy](/0.1.1/actions/destroy)
-- [#show](/0.1.1/actions/show)
-- [#index](/0.1.1/actions/index)
+- [#create]({{ site.baseurl }}/0.1.1/actions/create)
+- [#update]({{ site.baseurl }}/0.1.1/actions/update)
+- [#destroy]({{ site.baseurl }}/0.1.1/actions/destroy)
+- [#show]({{ site.baseurl }}/0.1.1/actions/show)
+- [#index]({{ site.baseurl }}/0.1.1/actions/index)
 
 ## Source code
 ```ruby

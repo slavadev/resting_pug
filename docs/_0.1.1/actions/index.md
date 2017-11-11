@@ -39,19 +39,19 @@ Response:
 ```
 
 ## How to customize
-- override [Params#permitted_fields_for_show](/0.1.1/params/permitted_fields_for_show) to set which params will be shown in response
-- override [Params#permitted_fields_for_filter](/0.1.1/params/permitted_fields_for_filter) to set which params can be used for filtering
-- override [Params#permitted_fields_for_sort](/0.1.1/params/permitted_fields_for_sort) to set which params can be used for sorting
-- override [Params#default_sort_params](/0.1.1/params/default_sort_params) to set default sort params
-- override [Params#per_page_default](/0.1.1/params/per_page_default) to set default per_page param
-- override [Params#per_page_range](/0.1.1/params/per_page_range) to set minimum and maximum possible per_page value
-- override [Render#render_subjects](/0.1.1/render/render_subjects) to set how subjects will be rendered
-- override [Subject#subject_model](/0.1.1/subject/subject_model) to set what model will be shown
-- override [Chains#index_chain](/0.1.1/chains/index_chain) to add or remove methods which will be called while updating a subject
+- override [Params#permitted_fields_for_show]({{ site.baseurl }}/0.1.1/params/permitted_fields_for_show) to set which params will be shown in response
+- override [Params#permitted_fields_for_filter]({{ site.baseurl }}/0.1.1/params/permitted_fields_for_filter) to set which params can be used for filtering
+- override [Params#permitted_fields_for_sort]({{ site.baseurl }}/0.1.1/params/permitted_fields_for_sort) to set which params can be used for sorting
+- override [Params#default_sort_params]({{ site.baseurl }}/0.1.1/params/default_sort_params) to set default sort params
+- override [Params#per_page_default]({{ site.baseurl }}/0.1.1/params/per_page_default) to set default per_page param
+- override [Params#per_page_range]({{ site.baseurl }}/0.1.1/params/per_page_range) to set minimum and maximum possible per_page value
+- override [Render#render_subjects]({{ site.baseurl }}/0.1.1/render/render_subjects) to set how subjects will be rendered
+- override [Subject#subject_model]({{ site.baseurl }}/0.1.1/subject/subject_model) to set what model will be shown
+- override [Chains#index_chain]({{ site.baseurl }}/0.1.1/chains/index_chain) to add or remove methods which will be called while updating a subject
 
 ## Use
-- [#run_chain](/0.1.1/actions/run_chain)
-- [Chains#index_chain](/0.1.1/chains/index_chain)
+- [#run_chain]({{ site.baseurl }}/0.1.1/actions/run_chain)
+- [Chains#index_chain]({{ site.baseurl }}/0.1.1/chains/index_chain)
 
 ## Source code
 ```ruby
