@@ -3,7 +3,6 @@ type: '0.1.1'
 category: Getting Started
 title: Welcome
 order: 1
-redirect_from: '/'
 ---
 
 <h1 align="center">
