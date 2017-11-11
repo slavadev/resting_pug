@@ -1,0 +1,42 @@
+# ----
+# Site
+
+title: Resting Pug
+url: "https://korolvs.github.io/resting_pug"
+baseurl: ''
+google_analytics_key:
+
+# Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
+logo: /siteicon.png
+description: A simple and fully customizable way to create an API in your Rails application
+author:
+  name: Slava Korolev
+  email: korolvs@gmail.com
+  twitter: korolvs
+
+# -----
+# Build
+
+permalink: pretty
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-redirect-from
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+
+collections:
+  '0.1.1':
+    title: '0.1.1'
+    permalink: /:collection/:path/
+    output: true
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: default

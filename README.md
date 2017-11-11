@@ -27,7 +27,7 @@ Resting Pug allows you to create a JSON API with just adding one line to your co
 
 ## Why should I use it?
 Often when you want to try a new idea or create a simple app you want to implement basic features very fast.
-Resting Pig allows you to do it with just couple lines of code.
+Resting Pug allows you to do it with just couple lines of code.
 But even though it is small and simple(and because it is small and simple) you can vastly customize created API.
 Attributes user can see, attributes user can edit, number of items on page, how to render items and errors - thats just a small part of things you can change overriding basic Resting Pug methods.
 

@@ -160,6 +160,11 @@ module RestingPug
 
     # Executes each method in a chain one by one
     # @param chain [Array] array of methods to execute
+    # @used_in {#create}
+    # @used_in {#update}
+    # @used_in {#destroy}
+    # @used_in {#show}
+    # @used_in {#index}
     def run_chain(chain)
       chain.each do |action|
         self.send(action)

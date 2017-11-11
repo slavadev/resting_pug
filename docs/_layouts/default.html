@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="generator" content="Jekyll v{{ jekyll.version }}">
+
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic|Open+Sans:400,400italic,600,600italic,700,700italic|Inconsolata:400,700">
+		<link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
+		<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="{{ site.baseurl }}/favicon-16x16.png">
+		<link rel="manifest" href="{{ site.baseurl }}/manifest.json">
+		<link rel="mask-icon" href="{{ site.baseurl }}/safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="theme-color" content="#ffffff">
+
+		{% seo %}
+
+		{% if jekyll.environment == 'production' and site.google_analytics_key != '' %}
+			<script>
+				(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+				})(window,document,"script","//www.google-analytics.com/analytics.js","ga");
+
+				ga("create", "{{ site.google_analytics_key }}", "auto");
+				ga("send", "pageview");
+			</script>
+		{% endif %}
+	</head>
+
+	<body>
+		<header>
+			<h1>
+				<a href="{{ site.baseurl }}/{{ page.type }}/index"><img src="{{ site.baseurl }}/images/emblem.svg" width="40" height="40" alt="{{ site.title }} logo"></a>
+				{{ site.title }}
+				<button type="button" class="open-nav" id="open-nav"></button>
+			</h1>
+
+			<form action="{{ site.baseurl }}/{{ page.type }}/search/" method="get">
+				<input type="text" name="q" id="search-input" placeholder="Search" autofocus>
+				<input type="submit" value="Search" style="display: none;">
+			</form>
+
+			{% assign collection = site.collections | where: 'title', '0.1.1' | first  %}
+			<nav>
+				<ul>
+					{% assign items = collection.docs | where: 'category', 'Getting Started' | sort: 'order' %}
+					{% for item in items %}
+						<li class="nav-item top-level {% if item.url == page.url %}current{% endif %}">
+							<a href="{{ site.baseurl }}{{ item.url }}">{{ item.title }}</a>
+						</li>
+					{% endfor %}
+				</ul>
+				<ul>
+					{% assign grouped = collection.docs | where_exp: 'item', 'item.category != "Getting Started"' | where_exp: 'item', 'item.category != ""' | group_by: 'category' %}
+					{% for group in grouped %}
+						<li class="nav-item top-level {% if group.name == page.category %}opened{% endif %}">
+							{% assign items = group.items | sort: 'order' %}
+							<a href="#" class='js-category'>{{ group.name }}</a>
+							<ul>
+								{% for item in items %}
+									<li class="nav-item {% if item.url == page.url %}current{% endif %}"><a href="{{ site.baseurl }}{{ item.url }}">{{ item.title }}</a></li>
+								{% endfor %}
+							</ul>
+						</li>
+					{% endfor %}
+				</ul>
+
+				<ul>
+					{% assign changelog = collection.docs | where: 'type', page.type | where: 'title', 'Changelog' | first %}
+					<li class="nav-item top-level {% if page.url == changelog.url %}current{% endif %}">
+						<a href="{{ changelog.url }}">{{ changelog.title }}</a>
+					</li>
+				</ul>
+				<div class='designed_by'>
+					Logo is <a href="https://www.freepik.com/free-vector/happy-pug-resting-on-the-sofa_1357299.htm">Designed by Freepik</a>
+				</div>
+			</nav>
+		</header>
+
+		<section class="main">
+			{% if page.title != 'Welcome' %}
+				<div class="page-header">
+					<h2>{% if page.category %}{{ page.category }}{% else %}{{ site.title }}{% endif %}</h2>
+					<h3>{{ page.title }}</h3>
+				</div>
+			{% endif %}
+			<article class="content">
+				{{ content }}
+			</article>
+		</section>
+
+		<script>
+			document.getElementById("open-nav").addEventListener("click", function () {
+				document.body.classList.toggle("nav-open");
+			});
+			var buttons = document.getElementsByClassName("js-category");
+			Array.prototype.forEach.call(buttons, function(item, i, arr){
+				item.addEventListener("click", function () {
+					this.parentNode.classList.toggle("opened");
+				});
+			})
+		</script>
+
+		<div class="github-corner">
+			<a href="{% if page.github %}{{ page.github }}{% else %}https://github.com/korolvs/resting_pug{% endif %}" title="Fork me on GitHub">
+			<svg viewbox="0 0 100 100" fill="currentColor"><title>Find me on GitHub</title>
+					<path d="M0 0v100h100V0H0zm60 70.2h.2c1 2.7.3 4.7 0 5.2 1.4 1.4 2 3 2 5.2 0 7.4-4.4 9-8.7 9.5.7.7 1.3 2 1.3 3.7V99c0 .5 1.4 1 1.4 1H44s1.2-.5 1.2-1v-3.8c-3.5 1.4-5.2-.8-5.2-.8-1.5-2-3-2-3-2-2-.5-.2-1-.2-1 2-.7 3.5.8 3.5.8 2 1.7 4 1 5 .3.2-1.2.7-2 1.2-2.4-4.3-.4-8.8-2-8.8-9.4 0-2 .7-4 2-5.2-.2-.5-1-2.5.2-5 0 0 1.5-.6 5.2 1.8 1.5-.4 3.2-.6 4.8-.6 1.6 0 3.3.2 4.8.7 2.8-2 4.4-2 5-2z"></path>
+			</svg>
+		</a></div>
+		<style> .github-corner {
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 120px;
+			height: 120px;
+			overflow: hidden;
+		}
+		.github-corner a {
+			position: absolute;
+			right: 0;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			transform: translate(50%, -50%) rotate(45deg);
+			color: #576BB1;
+		}</style>
+
+	</body>
+</html>
