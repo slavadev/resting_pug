@@ -8,7 +8,7 @@ redirect_from: '/'
 
 <h1 align="center">
   <br>
-  <img src="/logo.svg" alt="Logo" width="100%">
+  <img src="{{ site.baseurl }}/logo.svg" alt="Logo" width="100%">
   <br>
 </h1>
 
