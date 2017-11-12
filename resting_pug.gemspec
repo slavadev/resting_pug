@@ -23,4 +23,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'shoulda-matchers', '~> 3.1'
   s.add_development_dependency 'factory_girl', '~> 4.8'
   s.add_development_dependency 'faker', '~> 1.8'
+  s.add_development_dependency 'codecov', '~> 0'
 end
