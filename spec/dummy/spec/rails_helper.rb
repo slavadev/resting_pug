@@ -1,8 +1,8 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require 'spec_helper'
+require_relative 'spec_helper'
 require 'shoulda/matchers'
 require 'factory_girl'
-require 'factories/book'
+require_relative 'factories/book'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
