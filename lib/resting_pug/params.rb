@@ -8,7 +8,6 @@ module RestingPug
 
     # Returns an array with all fields that API can use
     # @note Override this method to add or remove fields that you don't want API to use.
-    # @return [Array] of symbols representing attributes
     # @used_in {#permitted_fields_for_show}
     # @used_in {#permitted_fields_for_create}
     # @used_in {#permitted_fields_for_update}
@@ -31,7 +30,6 @@ module RestingPug
 
     # Returns an array with all fields that API will show
     # @note Override this method to add or remove fields that you don't want API to show.
-    # @return [Array] of symbols representing attributes
     # @used_in {Render#render_subject}
     # @used_in {Render#render_subjects}
     # @use {#permitted_fields}
@@ -51,7 +49,6 @@ module RestingPug
 
     # Returns an array with all fields that API will allow to use while creating a subject
     # @note Override this method to add or remove fields that you don't want API to use for creating.
-    # @return [Array] of symbols representing attributes
     # @used_in {#params_for_create}
     # @use {#permitted_fields}
     # @example
@@ -70,7 +67,6 @@ module RestingPug
 
     # Returns an array with all fields that API will allow to use while updating a subject
     # @note Override this method to add or remove fields that you don't want API to use for updating.
-    # @return [Array] of symbols representing attributes
     # @used_in {#params_for_update}
     # @use {#permitted_fields}
     # @example
@@ -89,7 +85,6 @@ module RestingPug
 
     # Returns an array with all fields that API will allow to use while sorting subjects
     # @note Override this method to add or remove fields that you don't want API to use for sorting.
-    # @return [Array] of symbols representing attributes
     # @used_in {#sort_params}
     # @use {#permitted_fields}
     # @example
@@ -109,7 +104,6 @@ module RestingPug
     # Returns an array with all fields that API will allow to use while filtering subjects by single value
     # @note Override this method to add or remove fields that you don't want API to use for filtering by single value.
     #   If you want to change attributes that can be filtered by arrays of values check {#permitted_fields_for_filter_arrays}
-    # @return [Array] of symbols representing attributes
     # @used_in {#permitted_fields_for_filter_arrays}
     # @used_in {#permitted_fields_for_filter_with_arrays}
     # @use {#permitted_fields}
@@ -130,7 +124,6 @@ module RestingPug
     # Returns an array with all fields that API will allow to use while filtering subjects by array of values
     # @note Override this method to add or remove fields that you don't want API to use for filtering by array of values.
     #   If you want to change attributes that can be filtered by single value check {#permitted_fields_for_filter}
-    # @return [Array] of symbols representing attributes
     # @used_in {#permitted_fields_for_filter_with_arrays}
     # @use {#permitted_fields_for_filter}
     # @example
@@ -149,7 +142,6 @@ module RestingPug
 
     # Returns an array with all fields that API will allow to use while filtering subjects both by single values and by array of values
     # @note To set fields that can be used check {#permitted_fields_for_filter} and {#permitted_fields_for_filter_arrays}
-    # @return [Array] of symbols representing attributes
     # @used_in {#filter_params}
     # @use {#permitted_fields_for_filter}
     # @use {#permitted_fields_for_filter_arrays}
@@ -252,9 +244,9 @@ module RestingPug
       return { page: page, per_page: per_page }
     end
 
-    # Returns a hash minimum and maximum per_page param like { page: 1, per_page: 10 }
+    # Returns a hash with minimum and maximum per_page param like { page: 1, per_page: 10 }
     # @note Override {#per_page_default per_page_default} to set default per_page param.
-    # @used_in {#pagination_params pagination_params}
+    # @used_in {#pagination_params}
     # @example
     #   class BooksController < ApplicationController
     #     include RestingPug::Base
@@ -271,7 +263,7 @@ module RestingPug
 
     # Returns a default per_page param
     # @note Override {#per_page_range per_page_range} to set minimum and maximum per_page param
-    # @used_in {#pagination_params pagination_params}
+    # @used_in {#pagination_params}
     # @example
     #   class BooksController < ApplicationController
     #     include RestingPug::Base

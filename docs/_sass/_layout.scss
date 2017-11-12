@@ -245,7 +245,7 @@ nav > ul {
 		color: #666;
 		text-decoration: none;
 		font-size: 1.4rem;
-		padding: $space / 2 0 $space / 2 $space * 2;
+		padding: $space / 2 0 $space / 2 $space * 3;
 		display: block;
 	}
 
@@ -255,10 +255,26 @@ nav > ul {
 		color: #111;
 	}
 
+	&.middle-level > a {
+		line-height: 1.5;
+		font-weight: 600;
+		padding-left: $space * 2;
+	}
+
 	&.top-level > a {
 		line-height: 1.5;
 		font-weight: 600;
 		padding-left: $space;
+	}
+
+	&.methods {
+		color: #666;
+		text-decoration: none;
+		font-size: 1.4rem;
+		padding: $space / 2 0 $space / 2 $space;
+		display: block;
+		line-height: 1.5;
+		font-weight: 600;
 	}
 }
 
@@ -466,5 +482,5 @@ img {
 
 .designed_by {
 	font-size: 0.6em;
-	text-align: center;
+	padding-left: 20px;
 }

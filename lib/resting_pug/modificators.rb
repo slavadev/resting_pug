@@ -43,7 +43,7 @@ module RestingPug
     # Filters subjects using filter params
     # @note Override this method to change how subjects are filtered
     # @used_in {Chains#index_chain}
-    # @use {Params#pagination_params}
+    # @use {Params#filter_params}
     # @example
     #   class BooksController < ApplicationController
     #     include RestingPug::Base

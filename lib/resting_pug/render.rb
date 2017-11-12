@@ -126,7 +126,7 @@ module RestingPug
       render json: { errors: { subject_model_sym => ['param is missing'] } }, status: 400
     end
 
-    # Renders error when required params are missing
+    # Renders error when required object is not found
     # @note Override this method to add more complicated logic of rendering.
     # @used_in {Base.included}
     # @example
