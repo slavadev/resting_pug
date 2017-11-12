@@ -6,6 +6,10 @@
 </h1>
 
 [![Gem Version](https://badge.fury.io/rb/resting_pug.svg)](https://badge.fury.io/rb/resting_pug)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e53c62ffa3ee4cba3895/maintainability)](https://codeclimate.com/github/korolvs/resting_pug/maintainability)
+[![Build Status](https://travis-ci.org/korolvs/resting_pug.svg?branch=master)](https://travis-ci.org/korolvs/resting_pug)
+[![codecov](https://codecov.io/gh/korolvs/resting_pug/branch/master/graph/badge.svg)](https://codecov.io/gh/korolvs/resting_pug)
+
 ## Table of Contents
 
 - [What is Resting Pug?](#what-is-resting-pug)
