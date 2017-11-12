@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    resting_pug (0.1.0)
+    resting_pug (0.1.1)
       will_paginate (~> 3)
 
 GEM
