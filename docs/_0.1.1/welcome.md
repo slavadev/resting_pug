@@ -7,7 +7,7 @@ order: 1
 
 <h1 align="center">
   <br>
-  <img src="{{ site.baseurl }}/logo.svg" alt="Logo" width="100%">
+  <img src="{{ site.baseurl }}/logo.png" alt="Logo" width="100%">
   <br>
 </h1>
 
