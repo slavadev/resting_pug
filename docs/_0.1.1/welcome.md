@@ -84,6 +84,6 @@ end
 
 **4.** Enjoy your new API and don't hesitate to change it whatever you want!
 
-If you want to learn what you can customize check the [Created Actions](/0.1.1/actions) page.
+If you want to learn what you can customize check the [Created Actions]({{ site.baseurl }}/0.1.1/actions) page.
 
 Logo is [Designed by Freepik](https://www.freepik.com/free-vector/happy-pug-resting-on-the-sofa_1357299.htm)
