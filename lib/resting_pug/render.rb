@@ -67,12 +67,22 @@ module RestingPug
     #
     #     private
     #     # Override a render_subjects to render with 'items' as a root object
-    #     def render_subjects
-    #       render json: { items: @subjects.as_json(only: permitted_fields_for_show) }
-    #     end
+    #     render json: {
+    #       items: @subjects.as_json(only: permitted_fields_for_show),
+    #       total_pages: @subjects.total_pages,
+    #       total_entries: @subjects.total_entries,
+    #       current_page: @subjects.current_page,
+    #       per_page: @subjects.per_page
+    #     }
     #   end
     def render_subjects
-      render json: { subject_model_sym_plural => @subjects.as_json(only: permitted_fields_for_show) }
+      render json: {
+        subject_model_sym_plural => @subjects.as_json(only: permitted_fields_for_show),
+        total_pages: @subjects.total_pages,
+        total_entries: @subjects.total_entries,
+        current_page: @subjects.current_page,
+        per_page: @subjects.per_page
+      }
     end
 
     # Renders empty response

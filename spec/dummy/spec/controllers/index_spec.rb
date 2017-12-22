@@ -5,6 +5,20 @@ RSpec.describe BooksController, type: :controller do
     subject { get :index, params: params }
     let(:params) { {} }
     let!(:books) { create_list :book, 25 }
+    let(:response_json) {
+      {
+        books: response_books,
+        total_pages: total_pages,
+        total_entries: total_entries,
+        current_page: current_page,
+        per_page: response_per_page
+      }.to_json
+    }
+    let(:response_books) { [] }
+    let(:total_pages) { 1 }
+    let(:total_entries) { 0 }
+    let(:current_page) { 1 }
+    let(:response_per_page) { 10 }
 
     before do
       subject
@@ -18,13 +32,17 @@ RSpec.describe BooksController, type: :controller do
       context 'when there are no books' do
         let!(:books) { nil }
         it 'returns an empty array' do
-          expect(response.body).to eq({ books: [] }.to_json)
+          expect(response.body).to eq(response_json)
         end
       end
 
       context 'when there are books' do
+        let(:response_books) { books.last(10).reverse }
+        let(:total_pages) { 3 }
+        let(:total_entries) { 25 }
+
         it 'returns an array of books' do
-          expect(response.body).to eq({ books: books.last(10).reverse }.to_json)
+          expect(response.body).to eq(response_json)
         end
       end
     end
@@ -33,9 +51,13 @@ RSpec.describe BooksController, type: :controller do
       context 'per_page specs' do
         context 'per_page param' do
           let(:params) { { per_page: 5 } }
+          let(:response_books) { books.last(5).reverse }
+          let(:total_pages) { 5 }
+          let(:total_entries) { 25 }
+          let(:response_per_page) { 5 }
 
           it 'returns an 5 books' do
-            expect(response.body).to eq({ books: books.last(5).reverse }.to_json)
+            expect(response.body).to eq(response_json)
           end
         end
 
@@ -45,8 +67,13 @@ RSpec.describe BooksController, type: :controller do
             get :index, params: params
           end
 
+          let(:response_books) { books.last(5).reverse }
+          let(:total_pages) { 5 }
+          let(:total_entries) { 25 }
+          let(:response_per_page) { 5 }
+
           it 'returns an 5 books' do
-            expect(response.body).to eq({ books: books.last(5).reverse }.to_json)
+            expect(response.body).to eq(response_json)
           end
         end
 
@@ -59,16 +86,26 @@ RSpec.describe BooksController, type: :controller do
           context 'when per_page is less than minimum' do
             let(:params) { { per_page: 3 } }
 
+            let(:response_books) { books.last(5).reverse }
+            let(:total_pages) { 5 }
+            let(:total_entries) { 25 }
+            let(:response_per_page) { 5 }
+
             it 'returns an 5 books' do
-              expect(response.body).to eq({ books: books.last(5).reverse }.to_json)
+              expect(response.body).to eq(response_json)
             end
           end
 
           context 'when per_page is more than maximum' do
             let(:params) { { per_page: 30 } }
 
+            let(:response_books) { books.last(7).reverse }
+            let(:total_pages) { 4 }
+            let(:total_entries) { 25 }
+            let(:response_per_page) { 7 }
+
             it 'returns an 7 books' do
-              expect(response.body).to eq({ books: books.last(7).reverse }.to_json)
+              expect(response.body).to eq(response_json)
             end
           end
         end
@@ -77,8 +114,14 @@ RSpec.describe BooksController, type: :controller do
       context 'page specs' do
         let(:params) { { page: 3, per_page: 5 } }
 
+        let(:response_books) { books[10..14].reverse }
+        let(:total_pages) { 5 }
+        let(:total_entries) { 25 }
+        let(:response_per_page) { 5 }
+        let(:current_page) { 3 }
+
         it 'returns 3rd page' do
-          expect(response.body).to eq({ books: books[10..14].reverse }.to_json)
+          expect(response.body).to eq(response_json)
         end
       end
     end
@@ -87,8 +130,12 @@ RSpec.describe BooksController, type: :controller do
       context 'basic sorting' do
         let(:params) { { per_page: 25, sort: '-author,title' } }
 
+        let(:response_books) { books.sort{ |x,y| x.author == y.author ? x.title <=> y.title : y.author <=> x.author } }
+        let(:total_entries) { 25 }
+        let(:response_per_page) { 25 }
+
         it 'returns books sorted in the right way' do
-          expect(response.body).to eq({ books: books.sort{|x,y| x.author == y.author ? x.title <=> y.title : y.author <=> x.author} }.to_json)
+          expect(response.body).to eq(response_json)
         end
       end
 
@@ -100,8 +147,12 @@ RSpec.describe BooksController, type: :controller do
 
         let(:params) { { per_page: 25 } }
 
+        let(:response_books) { books.sort{ |x,y| y.author <=> x.author } }
+        let(:total_entries) { 25 }
+        let(:response_per_page) { 25 }
+
         it 'returns books sorted in the right way' do
-          expect(response.body).to eq({ books: books.sort{|x,y| y.author <=> x.author} }.to_json)
+          expect(response.body).to eq(response_json)
         end
       end
 
@@ -113,8 +164,12 @@ RSpec.describe BooksController, type: :controller do
 
         let(:params) { { per_page: 25, sort: 'author' } }
 
+        let(:response_books) { books.sort{ |x,y| y.id <=> x.id } }
+        let(:total_entries) { 25 }
+        let(:response_per_page) { 25 }
+
         it 'returns books sorted in the right way' do
-          expect(response.body).to eq({ books: books.sort{|x,y| y.id <=> x.id} }.to_json)
+          expect(response.body).to eq(response_json)
         end
       end
     end
@@ -132,8 +187,11 @@ RSpec.describe BooksController, type: :controller do
             get :index, params: params
           end
 
+          let(:response_books) { [another_book, book] }
+          let(:total_entries) { 2 }
+
           it 'returns filtered books' do
-            expect(response.body).to eq({ books: [another_book, book] }.to_json)
+            expect(response.body).to eq(response_json)
           end
         end
 
@@ -144,8 +202,12 @@ RSpec.describe BooksController, type: :controller do
             get :index, params: params
           end
 
+          let(:response_books) { [another_book, book] + books.reverse.first(8) }
+          let(:total_entries) { 27 }
+          let(:total_pages) { 3 }
+
           it 'returns all books' do
-            expect(response.body).to eq({ books: [another_book, book] + books.reverse.first(8) }.to_json)
+            expect(response.body).to eq(response_json)
           end
         end
       end
@@ -159,8 +221,11 @@ RSpec.describe BooksController, type: :controller do
             get :index, params: params
           end
 
+          let(:response_books) { [another_book, book] }
+          let(:total_entries) { 2 }
+
           it 'returns filtered books' do
-            expect(response.body).to eq({ books: [another_book, book] }.to_json)
+            expect(response.body).to eq(response_json)
           end
         end
 
@@ -171,8 +236,12 @@ RSpec.describe BooksController, type: :controller do
             get :index, params: params
           end
 
+          let(:response_books) { [another_book, book] + books.reverse.first(8) }
+          let(:total_entries) { 27 }
+          let(:total_pages) { 3 }
+
           it 'returns all books' do
-            expect(response.body).to eq({ books: [another_book, book] + books.reverse.first(8) }.to_json)
+            expect(response.body).to eq(response_json)
           end
         end
       end
@@ -187,8 +256,11 @@ RSpec.describe BooksController, type: :controller do
             get :index, params: params
           end
 
+          let(:response_books) { [book] }
+          let(:total_entries) { 1 }
+
           it 'returns filtered books' do
-            expect(response.body).to eq({ books: [book] }.to_json)
+            expect(response.body).to eq(response_json)
           end
         end
 
@@ -199,8 +271,11 @@ RSpec.describe BooksController, type: :controller do
             get :index, params: params
           end
 
+          let(:response_books) { [another_book, book] }
+          let(:total_entries) { 2 }
+
           it 'returns filtered books for one param' do
-            expect(response.body).to eq({ books: [another_book, book] }.to_json)
+            expect(response.body).to eq(response_json)
           end
         end
       end
