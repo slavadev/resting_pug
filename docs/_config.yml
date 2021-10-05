@@ -2,7 +2,7 @@
 # Site
 
 title: Resting Pug
-url: "https://korolvs.github.io/resting_pug"
+url: "https://slavadev.github.io/resting_pug"
 baseurl: '/resting_pug'
 google_analytics_key:
 
@@ -12,7 +12,7 @@ description: A simple and fully customizable way to create an API in your Rails 
 author:
   name: Slava Korolev
   email: korolvs@gmail.com
-  twitter: korolvs
+  twitter: slavadev
 
 # -----
 # Build
